@@ -3,7 +3,7 @@ Puppet External Node Classifier
 
 ## Installation
 
-  go get -u github.com/kenno/puppetenc
+    go get -u github.com/kenno/puppetenc
 
 ## Usage & Example
 
