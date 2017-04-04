@@ -28,20 +28,22 @@ const (
 `
 
 	// VERSION is the binary version.
-	VERSION = "v0.0.1"
-
-	dashboardURL = "http://localhost:3000"
+	VERSION = "v0.0.2"
 )
 
 var (
 	node    string
 	version bool
+	host    string
+	port    int
 )
 
 func init() {
 	// parse flags
 	flag.BoolVar(&version, "version", false, "print version and exit")
 	flag.BoolVar(&version, "v", false, "print version and exist (shorthand)")
+	flag.StringVar(&host, "host", "localhost", "puppet dashboard URL")
+	flag.IntVar(&port, "port", 3000, "port number")
 
 	flag.Usage = func() {
 		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, VERSION))
@@ -64,6 +66,7 @@ func init() {
 
 func main() {
 
+	dashboardURL := fmt.Sprintf("http://%s:%d", host, port)
 	u, err := url.Parse(dashboardURL + "/nodes/" + node)
 	if err != nil {
 		log.Fatal(err)
